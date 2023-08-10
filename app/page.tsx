@@ -17,6 +17,31 @@ const Page = () => {
     fetchImage();
   }, []);
 
+  useEffect(() => {
+    const imageElement = imageRef.current;
+
+    if (!imageElement) {
+      return;
+    }
+
+    const updateWindowSize = async () => {
+      const { appWindow, LogicalSize } = await import("@tauri-apps/api/window");
+
+      const newWidth = Math.floor(
+        (imageElement.naturalWidth * imageElement.height) /
+          imageElement.naturalHeight,
+      );
+
+      const newWindowSize = new LogicalSize(newWidth, imageElement.height);
+
+      await appWindow.setSize(newWindowSize);
+    };
+
+    imageElement.addEventListener("load", updateWindowSize);
+
+    return () => imageElement.removeEventListener("load", updateWindowSize);
+  }, [blobUrl]);
+
   const fetchImage = async () => {
     setIsFetching(true);
 
