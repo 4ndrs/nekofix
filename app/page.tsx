@@ -12,6 +12,7 @@ const Page = () => {
   const [blobUrl, setBlobUrl] = useState<string>();
 
   const imageRef = useRef<HTMLImageElement>(null);
+  const previousWidthRef = useRef<number>();
 
   useEffect(() => {
     fetchImage();
@@ -35,6 +36,32 @@ const Page = () => {
       const newWindowSize = new LogicalSize(newWidth, imageElement.height);
 
       await appWindow.setSize(newWindowSize);
+      await updateWindowPosition(newWidth);
+
+      previousWidthRef.current = newWidth;
+    };
+
+    const updateWindowPosition = async (newWidth: number) => {
+      if (typeof previousWidthRef.current === "undefined") {
+        return;
+      }
+
+      const { appWindow, LogicalPosition } = await import(
+        "@tauri-apps/api/window"
+      );
+
+      const currentPosition = (await appWindow.outerPosition()).toLogical(
+        await appWindow.scaleFactor(),
+      );
+
+      const offset = previousWidthRef.current - newWidth;
+
+      const newWindowPosition = new LogicalPosition(
+        currentPosition.x + offset / 2,
+        currentPosition.y,
+      );
+
+      await appWindow.setPosition(newWindowPosition);
     };
 
     imageElement.addEventListener("load", updateWindowSize);
