@@ -34,6 +34,9 @@ jobs:
       - name: install frontend dependencies
         run: npm ci
 
+      - name: delete previous test build pre-release
+        run: gh release delete --yes --cleanup-tag test-build
+
       - uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
