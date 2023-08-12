@@ -36,6 +36,8 @@ jobs:
 
       - name: delete previous test build pre-release
         run: gh release delete --yes --cleanup-tag test-build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: tauri-apps/tauri-action@v0
         env:
