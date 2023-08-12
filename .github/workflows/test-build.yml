@@ -35,6 +35,7 @@ jobs:
         run: npm ci
 
       - name: delete previous test build pre-release
+        if: matrix.platform == 'ubuntu-20.04'
         run: gh release delete --yes --cleanup-tag test-build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
