@@ -137,7 +137,10 @@ const Loading = ({ isFetching }: { isFetching: boolean }) => {
     } else {
       setLoadPercentage(100);
 
-      hideId = setTimeout(() => setHidden(true), 700);
+      hideId = setTimeout(() => {
+        setHidden(true);
+        setLoadPercentage(0);
+      }, 700);
     }
 
     return () => {
