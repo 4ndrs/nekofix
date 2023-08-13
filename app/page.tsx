@@ -87,6 +87,8 @@ const Page = () => {
 
   return (
     <main>
+      <Loading isFetching={isFetching} />
+
       {blobUrl && (
         <Image
           ref={imageRef}
@@ -98,12 +100,6 @@ const Page = () => {
         />
       )}
 
-      {isFetching && (
-        <div className="absolute inset-0 text-3xl bold flex justify-center items-center backdrop-blur">
-          <span className="text-blue-800 animate-bounce">Loading Now...</span>
-        </div>
-      )}
-
       <button
         onClick={fetchImage}
         className="absolute bottom-2 right-1/2 translate-x-1/2 bg-red-400 px-6 py-2"
@@ -111,6 +107,52 @@ const Page = () => {
         Paw
       </button>
     </main>
+  );
+};
+
+const Loading = ({ isFetching }: { isFetching: boolean }) => {
+  const [loadPercentage, setLoadPercentage] = useState(0);
+  const [hidden, setHidden] = useState(true);
+
+  useEffect(() => {
+    let bufferId: NodeJS.Timer;
+    let hideId: NodeJS.Timer;
+
+    if (isFetching) {
+      setHidden(false);
+      setLoadPercentage(30);
+
+      bufferId = setInterval(
+        () =>
+          setLoadPercentage((previous) => {
+            if (previous < 80) {
+              return previous + 5;
+            }
+
+            clearInterval(bufferId);
+            return previous;
+          }),
+        100,
+      );
+    } else {
+      setLoadPercentage(100);
+
+      hideId = setTimeout(() => setHidden(true), 700);
+    }
+
+    return () => {
+      clearInterval(bufferId);
+      clearTimeout(hideId);
+    };
+  }, [isFetching]);
+
+  return (
+    <div
+      style={{ width: loadPercentage + "%" }}
+      className={`${
+        hidden ? "hidden" : "block"
+      } fixed top-0 left-0 h-2 bg-blue-400 w-10 transition-width duration-700`}
+    />
   );
 };
 
