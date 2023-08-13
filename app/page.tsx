@@ -96,6 +96,7 @@ const Page = () => {
           src={blobUrl}
           width={300}
           height={300}
+          draggable={false}
           className="h-screen object-cover w-auto max-w-full mx-auto"
         />
       )}
