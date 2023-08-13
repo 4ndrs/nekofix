@@ -155,8 +155,8 @@ const Loading = ({ isFetching }: { isFetching: boolean }) => {
     <div
       style={{ width: loadPercentage + "%" }}
       className={`${
-        hidden ? "hidden" : "block"
-      } fixed top-0 left-0 h-2 bg-blue-400 w-10 transition-width duration-700`}
+        hidden ? "opacity-0" : "opacity-100"
+      } fixed top-0 left-0 h-2 bg-blue-400 w-10 transition-[width] duration-700`}
     />
   );
 };
