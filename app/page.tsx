@@ -112,7 +112,7 @@ const Page = () => {
           height={300}
           draggable={true}
           data-tauri-drag-region
-          className="h-screen object-cover w-auto max-w-full mx-auto"
+          className="h-screen object-cover w-auto max-w-full mx-auto select-none"
         />
       )}
 
