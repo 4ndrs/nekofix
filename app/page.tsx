@@ -171,7 +171,7 @@ const Loading = ({ isFetching }: { isFetching: boolean }) => {
       style={{ width: loadPercentage + "%" }}
       className={`${
         hidden ? "opacity-0" : "opacity-100"
-      } fixed top-0 left-0 h-2 bg-blue-400 w-10 transition-[width] duration-700`}
+      } fixed top-0 left-0 h-2 bg-red-400 w-10 transition-[width] duration-700`}
     />
   );
 };
