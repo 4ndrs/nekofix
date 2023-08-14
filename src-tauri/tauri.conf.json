@@ -96,8 +96,10 @@
         "resizable": true,
         "title": "nekofix",
         "width": 800,
-        "decorations": false
+        "decorations": false,
+        "transparent": true
       }
-    ]
+    ],
+    "macOSPrivateApi": true
   }
 }
