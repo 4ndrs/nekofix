@@ -104,6 +104,7 @@ const Page = () => {
 
       <button
         onClick={fetchImage}
+        disabled={isFetching}
         className="absolute bottom-2 right-1/2 translate-x-1/2 bg-red-400 px-6 py-2"
       >
         Paw
