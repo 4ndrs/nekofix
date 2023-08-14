@@ -110,11 +110,13 @@ const Page = () => {
           src={blobUrl}
           width={300}
           height={300}
-          draggable={true}
-          data-tauri-drag-region
+          draggable={false}
           className="h-screen object-cover w-auto max-w-full mx-auto select-none"
         />
       )}
+
+      {/* draggable area to move the window */}
+      <div data-tauri-drag-region className="absolute inset-3" />
 
       <button
         onClick={async () => {
