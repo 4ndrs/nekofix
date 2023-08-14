@@ -16,6 +16,20 @@ const Page = () => {
 
   useEffect(() => {
     fetchImage();
+
+    const handleKeyDown = async (event: KeyboardEvent) => {
+      if (event.key !== "q" && event.key !== "Escape") {
+        return;
+      }
+
+      const { appWindow } = await import("@tauri-apps/api/window");
+
+      appWindow.close();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   useEffect(() => {
