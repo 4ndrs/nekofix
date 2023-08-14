@@ -100,7 +100,10 @@ const Page = () => {
   };
 
   return (
-    <main className="relative group rounded-2xl overflow-hidden">
+    <main
+      onContextMenu={(event) => event.preventDefault()}
+      className="relative group rounded-2xl overflow-hidden"
+    >
       <Loading isFetching={isFetching} />
 
       {blobUrl && (
