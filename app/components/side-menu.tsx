@@ -22,7 +22,7 @@ const SideMenu = ({ open, onClose }: Props) => {
       <aside
         data-tauri-drag-region
         className={clsx(
-          "absolute w-96 inset-y-8 bg-white rounded-r-xl overflow-scroll transition-[left] duration-500",
+          "absolute w-96 inset-y-8 bg-white rounded-r-xl transition-[left] duration-500",
           { "left-0": open, "-left-[24rem]": !open },
         )}
       >
