@@ -4,12 +4,14 @@ import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 import clsx from "clsx";
 import axios from "axios";
+
 import Image from "next/image";
 
 import { useEffect, useRef, useState } from "react";
 import { useNekoStore } from "./store";
 
 import SideMenu from "./components/side-menu";
+import Shigure from "./assets/15141311421079.jpg";
 
 const endpoint = "https://placeneko.com/api/random";
 
@@ -24,8 +26,6 @@ const Page = () => {
   const { nekos } = useNekoStore();
 
   useEffect(() => {
-    fetchImage();
-
     const handleKeyDown = async (event: KeyboardEvent) => {
       if (event.key !== "q" && event.key !== "Escape") {
         return;
@@ -118,17 +118,15 @@ const Page = () => {
       >
         <Loading isFetching={isFetching} />
 
-        {blobUrl && (
-          <Image
-            ref={imageRef}
-            alt="image of a catgirl"
-            src={blobUrl}
-            width={300}
-            height={300}
-            draggable={false}
-            className="h-screen object-cover w-auto max-w-full mx-auto select-none"
-          />
-        )}
+        <Image
+          ref={imageRef}
+          alt="image of a catgirl"
+          src={blobUrl || Shigure}
+          width={300}
+          height={300}
+          draggable={false}
+          className="h-screen object-cover w-auto max-w-full mx-auto select-none"
+        />
 
         {/* draggable area to move the window */}
         <div data-tauri-drag-region className="absolute inset-3" />
